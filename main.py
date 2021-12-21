@@ -15,7 +15,7 @@ print('-------------------------Start: Answer 1.a ------------------------------
 #Answer 1 Real-world scenario: The project should use a real-world dataset and include a reference of their source in the report (10)
 # Working with S&P 500 companies historical prices and fundamental data. https://www.kaggle.com/dgawlik/nyse
 # Dataset used are
-#     Alphavantage for fetching real time Stock data: https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AAPL&outputsize=full&apikey=9AZIN6Q78VVQXW5H
+#     Alphavantage for fetching real time Stock data: https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=GOOGL&outputsize=full&apikey=9AZIN6Q78VVQXW5H
 #     prices.csv : This has historical prices for over 500 companies ranging from 4th Jan 2010 - 31st Dec 2016
 #     Securities.csv : This has details like Company name, Headquarter address, Inception Date and their Sector and Industry Classification
 print('The Answer is elaborated in Abstract (in the attached document)')
@@ -205,43 +205,43 @@ print('--------------------------------End:Answer 3.a, 3.c ---------------------
 print('----------------------------------Start: Answer 5  -------------------------------------------------------------------------')
 # Work with Prices data to use ML - Regression Algo
 
-# Filtering the Prices dataframe on a particular symbol for APPLE = AAPL
-selected_symbol = ['AAPL']
-df_Prices_AAPL = df_Prices[df_Prices['symbol'].isin(selected_symbol)]
-df_Prices_AAPL.info()
+# Filtering the Prices dataframe on a particular symbol for Google = GOOGL
+selected_symbol = ['GOOGL']
+df_Prices_GOOGL = df_Prices[df_Prices['symbol'].isin(selected_symbol)]
+df_Prices_GOOGL.info()
 
 # The above shows Date column as Object so converting the same into a Datetime object
-df_Prices_AAPL['date']= pd.to_datetime(df_Prices_AAPL['date'])
+df_Prices_GOOGL['date']= pd.to_datetime(df_Prices_GOOGL['date'])
 
-print(df_Prices_AAPL.dtypes)
+print(df_Prices_GOOGL.dtypes)
 
 # label_encoder object knows how to understand word labels.
 label_encoder = preprocessing.LabelEncoder()
 
 # Encoding Dates to be unique by passing Label_encoder
-df_Prices_AAPL['date'] = label_encoder.fit_transform(df_Prices_AAPL['date'])
-print(df_Prices_AAPL['date'].unique())
-df_Prices_AAPL['date'].apply(lambda x: float(x))
+df_Prices_GOOGL['date'] = label_encoder.fit_transform(df_Prices_GOOGL['date'])
+print(df_Prices_GOOGL['date'].unique())
+df_Prices_GOOGL['date'].apply(lambda x: float(x))
 
 # Setting a new data frame by droping the 'Symbol' column
-df_Prices_AAPL1 = df_Prices_AAPL[['date','open','close','low','high','volume']]
+df_Prices_GOOGL1 = df_Prices_GOOGL[['date','open','close','low','high','volume']]
 
 print('----------------Printing the Co-Relation Matrix ---------------------------')
-corrmat = df_Prices_AAPL1.corr()
+corrmat = df_Prices_GOOGL1.corr()
 print(corrmat)
 
 # Answer 6.a Part II: Visualize the Correlation Heat map with Seaborn
 top_corr_features = corrmat.index
 plt.figure(figsize=(20,20))
-g = sns.heatmap(df_Prices_AAPL1[top_corr_features].corr(), annot=True, cmap="RdYlGn")
+g = sns.heatmap(df_Prices_GOOGL1[top_corr_features].corr(), annot=True, cmap="RdYlGn")
 
 
 #With Co-relation metrics its evident that Volumn is least corelated with any other feature.
 # Hence setting up a ML algo to check for predictions of "Volumn" (Target) with other columns (Feature)
 
 # Initiating Features and target Variables
-X = df_Prices_AAPL1.drop('volume', axis=1).values  # Feature
-y = df_Prices_AAPL1['volume'].values  # Target
+X = df_Prices_GOOGL1.drop('volume', axis=1).values  # Feature
+y = df_Prices_GOOGL1['volume'].values  # Target
 
 print('---------------------------Data type of X (Feature)----------- :', type(X))
 print('---------------------------Shape of X (Feature)------------- :', X.shape)
