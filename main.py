@@ -257,7 +257,7 @@ regr.fit(X_train,y_train)
 print('ElasticNet Regression score is :',regr.score(X_test, y_test))
 
 # Using Lasso Regression for Regularize
-lasso = Lasso(alpha=0.1) #, normalize=False)
+lasso = Lasso(alpha=0.1)
 lasso.fit(X_train, y_train)
 lasso_pred = lasso.predict(X_test)
 print('Lasso Regression score is: ', lasso.score(X_test, y_test))
@@ -272,7 +272,7 @@ print('GridSearchCV Identified Lasso Score: ', grid_Lasso_result.best_score_)
 
 
 # Using Ridge Regression for Regularize
-ridge = Ridge(alpha=0.1) #, normalize=False)
+ridge = Ridge(alpha=0.1)
 ridge.fit(X_train, y_train)
 ridge_pred = ridge.predict(X_test)
 print("Ridge Regression Score is :", ridge.score(X_test, y_test))
@@ -295,7 +295,6 @@ print("Linear Regression score is :",reg_all.score(X_test, y_test))
 # Hyper-parameter tuning for Linear Regression
 # Setup the parameters and distributions to sample from: param_dist
 param_dist = {"fit_intercept": [True, False],
-              #"normalize": [False],
               "copy_X": [True, False],
               "n_jobs": [1,3,5],
               "positive": [True, False]
@@ -308,9 +307,6 @@ logreg_cv.fit(X_train,y_train)
 # Print the tuned parameters and score
 print("GridSearchCV Identified parameters for Linear Regression: ",logreg_cv.best_params_)
 print("GridSearchCV Identified Linear Score: ",logreg_cv.best_score_)
-
-# print(confusion_matrix(y_test, y_pred))
-# print(classification_report(y_test, y_pred))
 
 print('-------------------------End: Answer 5  -------------------------------------------------------------------------')
 
