@@ -81,7 +81,7 @@ print('-------------------------Start: Answer 2.a, 3.c, 4.a and 4.c.------------
 
 Stock_List = ['AAPL','GOOGL','MSFT','TWTR','AMZN']
 
-Latest_StockPrices(Stock_List) # Calling a parameterized Function and passing a List
+# Latest_StockPrices(Stock_List) # Calling a parameterized Function and passing a List
 
 print('-------------------------End: Answer 2.a, 3.c, 4.a and 4.c.-------------------------------------------------------------------')
 
@@ -231,13 +231,15 @@ corrmat = df_Prices_GOOGL1.corr()
 print(corrmat)
 
 # Answer 6.a Part II: Visualize the Correlation Heat map with Seaborn
-top_corr_features = corrmat.index
-plt.figure(figsize=(20,20))
-g = sns.heatmap(df_Prices_GOOGL1[top_corr_features].corr(), annot=True, cmap="RdYlGn")
+dataplot = sns.heatmap(df_Prices_GOOGL1.corr(), cmap="RdYlGn", annot=True)
+
+# displaying heatmap
+plt.show()
+
 
 
 #With Co-relation metrics its evident that Volumn is least corelated with any other feature.
-# Hence setting up a ML algo to check for predictions of "Volumn" (Target) with other columns (Feature)
+# Hence setting up a ML algo to check for predictions of "Volume" (Target) with other columns (Feature)
 
 # Initiating Features and target Variables
 X = df_Prices_GOOGL1.drop('volume', axis=1).values  # Feature
